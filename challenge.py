@@ -13,6 +13,7 @@ import sys
 import json
 import csv
 from xml.etree import ElementTree as ET
+import defusedxml.ElementTree
 
 def parse_args():
     """
@@ -71,7 +72,7 @@ def parse_xml(file_path):
     """
     addresses = []
     try:
-        tree = ET.parse(file_path)
+        tree = defusedxml.ElementTree.parse(file_path)
         root = tree.getroot()
         for entity in root.findall('.//ENT'):
             address = {}
